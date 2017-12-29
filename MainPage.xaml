@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             x:Class="DrawTouch.MainPage">
+
+    <StackLayout x:Name="stackLayout" Margin="0, 20, 0, 0">
+        <Label Text="Drawing and Touch/Tracking Demo:" />
+        <Label Text="    Book Characters Correlation Diagram" />
+        <Label Text="----------------------------------------" />
+
+        <!-- Add a new Character Group page to PageListView-->
+        <StackLayout Orientation="Horizontal">
+            <StackLayout>
+                <Entry x:Name="CharaGroupTitle" Text="" Placeholder="Characters Group" Keyboard="Text" WidthRequest="250"/>
+                <Entry x:Name="Characters" Text="" Placeholder="Characters" Keyboard="Text" WidthRequest="250">
+                    <!-- Enable this Entry, if CharaGroupTitle-Entry gets text input -->
+                    <Entry.Triggers>
+                        <DataTrigger TargetType="Entry" Binding="{Binding Source={x:Reference CharaGroupTitle}, Path=Text.Length}" Value="0">
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                    </Entry.Triggers>
+                </Entry>
+            </StackLayout>
+            <Button Text="Add Group" Clicked="AddPage" BorderColor="Blue" BorderWidth="1">
+                <!-- Enable this Button, if CharaGroupTitle-Entry gets text input -->
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference CharaGroupTitle}, Path=Text.Length}" Value="0">
+                        <Setter Property="IsEnabled" Value="False" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+        </StackLayout>
+
+        <!-- Create a Character Group page List "PageListView"
+                 Call "JumpPage" method, if one of the items (pages) is tapped -->
+        <ListView x:Name="PageListView" ItemTapped="JumpPage">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell
+                            Text="{Binding Title, Mode=TwoWay}" 
+                            Detail="{Binding Characters, Mode=TwoWay}" 
+                            TextColor="Black" DetailColor="DimGray" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
+
+    <!-- Change color, if Entry is focused -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Style.Triggers>
+                    <Trigger  TargetType="Entry" Property="IsFocused" Value="True">
+                        <Setter Property="BackgroundColor" Value="Aqua" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+</ContentPage>
+
