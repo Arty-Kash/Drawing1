@@ -5,4 +5,4 @@ A sample program to study how to draw figures such as lines and circles, and how
 * English:  http://fightwithprogramming.blogspot.jp/2017/12/drawing-1.html
 * Japanese:  https://fightwithprogramming.wordpress.com/2017/12/29/描画-1/
 
-[Keywords]  Xamarin.Forms, SkiaSharp, drawing, tap, drag, tracking, 
+[Keywords]  Xamarin.Forms, SkiaSharp, drawing, tap, drag, tracking, Trigger, ObservableCollection<Page>, Enumerable.Repeat, InputTransparent, 
